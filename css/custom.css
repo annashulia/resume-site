@@ -413,55 +413,86 @@ p {
   margin-top: 20px !important; /* увеличивай/уменьшай по вкусу */
 }
 
-/* ===== Адаптация под мобильные ===== */
-@media (max-width: 768px) {
+/* ====== MOBILE ≈ как на десктопе, только компактнее ====== */
 
-  /* Фото меньше, центрируем */
-  .hero-photo-wrap {
-    width: 200px !important;
-    height: 200px !important;
-    border-width: 6px !important;
-    margin: 20px auto 0 !important;
-  }
+/* планшеты и телефоны */
+@media (max-width: 768px){
 
-  /* Текст в hero — по центру */
-  .banner_taital,
-  .banner_text {
-    text-align: center !important;
+  /* КРУГИ в углах (уменьшаем и уводим к краям) */
+  .header_section{ position:relative; overflow:visible; }
+  .header_section::before{
+    left:-110px;          /* как слева на десктопе */
+    top:-90px;
+    width:220px;
+    height:220px;
+    background:#ff9ec6;
+    opacity:.55;          /* чуть мягче, чтобы не «съедал» текст */
+    z-index:0;
   }
-
-  /* Кнопки — в колонку, крупнее для тача */
-  .banner_section .btn {
-    display: block !important;
-    width: 100% !important;
-    max-width: 220px !important;
-    margin: 8px auto !important;
-    font-size: 16px !important;
-    padding: 12px !important;
-  }
-
-  /* Чипы — центрируем, делаем компактнее */
-  .chip {
-    font-size: 12px !important;
-    padding: 4px 10px !important;
-    margin: 4px !important;
-  }
-  .mt-3 {
-    text-align: center !important;
+  .header_section::after{
+    right:-130px;         /* как справа на десктопе */
+    top:-40px;
+    width:280px;
+    height:280px;
+    background:#ffe6a6;
+    opacity:.55;
+    z-index:0;
   }
 
-  /* Навбар — чтобы ссылки не прыгали */
-  .navbar-nav {
-    text-align: center !important;
+  /* LAYOUT hero: текст сверху слева, фото ниже по центру */
+  .hero-row{ align-items:flex-start; }
+  .hero-row .col-sm-6:first-child{ order:1; }
+  .hero-row .col-sm-6:last-child{ order:2; }
+
+  /* Заголовок/подзаголовок — почти как на десктопе, но меньше */
+  .banner_taital{
+    font-size:36px !important;
+    line-height:1.06 !important;
+    margin-bottom:8px !important;
+    text-align:left !important;
   }
-  .navbar-nav .nav-item {
-    margin: 6px 0 !important;
+  .banner_text{
+    font-size:15px !important;
+    line-height:1.45 !important;
+    margin:6px 0 12px !important;
+    text-align:left !important;
   }
 
-  /* Футер — колонки вниз */
-  .site-footer .contact-list {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 8px !important;
+  /* Кнопки — как на десктопе, но можно переносить строку */
+  .banner_section .btn{ padding:10px 16px; }
+  .banner_section .mt-2{ display:flex; gap:8px; flex-wrap:wrap; }
+
+  /* Чипы — компактнее и в несколько строк */
+  .chip{
+    font-size:12px !important;
+    padding:4px 8px !important;
+    margin:4px 6px 0 0 !important;
   }
+
+  /* Фото — круг поменьше, по центру, чуть отступа сверху */
+  .hero-photo-wrap{
+    width:220px;                 /* 200–240 можно по вкусу */
+    height:220px;
+    border-width:10px;
+    margin:14px auto 0 !important;
+    box-shadow:0 8px 18px rgba(255,158,198,.25);
+    z-index:1;
+  }
+
+  /* Отступы секций — плотнее, как на скриншоте десктопа */
+  .banner_section,
+  .about_section,
+  .cream_section,
+  .services_section_2{
+    padding-top:28px !important;
+    padding-bottom:26px !important;
+  }
+}
+
+/* очень маленькие экраны (iPhone SE и т.п.) — ещё чуть меньше круги/шрифт */
+@media (max-width: 380px){
+  .header_section::before{ left:-100px; top:-90px; width:180px; height:180px; }
+  .header_section::after{  right:-110px; top:-50px; width:220px; height:220px; }
+  .banner_taital{ font-size:32px !important; }
+  .hero-photo-wrap{ width:200px; height:200px; border-width:8px; }
 }
