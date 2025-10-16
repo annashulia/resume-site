@@ -36,6 +36,21 @@
 /* Мобилка */
 @media (max-width:768px){
   .hero-photo-wrap{ width:180px; height:180px; margin:-20px auto 0; border-width:6px; }
+  
+  /* Fix decorative circles for mobile - make them much smaller and better positioned */
+  .header_section::before {
+    width: 120px !important;
+    height: 120px !important;
+    left: -60px !important;
+    top: -30px !important;
+  }
+  
+  .header_section::after {
+    width: 150px !important;
+    height: 150px !important;
+    right: -75px !important;
+    top: 10px !important;
+  }
 }
 
 /* 1) убираем фон-изображение с кругами */
@@ -556,6 +571,23 @@ body.navbar-open {
 
 /* ===== MOBILE SPACING IMPROVEMENTS ===== */
 @media (max-width: 767px) {
+  /* Fix decorative circles - make them much smaller on mobile */
+  .header_section::before {
+    width: 60px !important;
+    height: 60px !important;
+    left: -30px !important;
+    top: -15px !important;
+    opacity: 0.2 !important;
+  }
+  
+  .header_section::after {
+    width: 80px !important;
+    height: 80px !important;
+    right: -40px !important;
+    top: 15px !important;
+    opacity: 0.2 !important;
+  }
+  
   /* Hero section mobile spacing */
   .banner_section {
     padding: 60px 0 40px 0 !important;
@@ -678,5 +710,34 @@ html {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+  }
+}
+
+/* ===== EXTRA SMALL MOBILE SCREENS ===== */
+@media (max-width: 480px) {
+  /* Hide decorative circles completely on very small screens */
+  .header_section::before,
+  .header_section::after {
+    display: none !important;
+  }
+  
+  /* Improve spacing without circles */
+  .banner_section {
+    padding: 40px 0 30px 0 !important;
+  }
+  
+  .banner_taital {
+    font-size: 28px !important;
+  }
+  
+  .banner_text {
+    font-size: 15px !important;
+  }
+  
+  .hero-photo-wrap {
+    width: 160px !important;
+    height: 160px !important;
+    margin: 15px auto 0 !important;
+    border-width: 4px !important;
   }
 }
