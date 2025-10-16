@@ -316,5 +316,81 @@ $(function () {
         interval: 5000
      });
 
+});
 
+/* ===== MOBILE NAVIGATION FIXES ===== */
+
+$(document).ready(function() {
+    // Handle mobile menu toggle
+    $('.navbar-toggler').on('click', function() {
+        var $navbarCollapse = $('.navbar-collapse');
+        var $body = $('body');
+        
+        if ($navbarCollapse.hasClass('show')) {
+            // Close menu
+            $navbarCollapse.removeClass('show');
+            $body.removeClass('navbar-open');
+            $(this).attr('aria-expanded', 'false');
+        } else {
+            // Open menu
+            $navbarCollapse.addClass('show');
+            $body.addClass('navbar-open');
+            $(this).attr('aria-expanded', 'true');
+        }
+    });
+    
+    // Close menu when clicking on a nav link
+    $('.navbar-nav .nav-link').on('click', function() {
+        $('.navbar-collapse').removeClass('show');
+        $('body').removeClass('navbar-open');
+        $('.navbar-toggler').attr('aria-expanded', 'false');
+    });
+    
+    // Close menu when clicking outside
+    $(document).on('click', function(e) {
+        var $navbar = $('.navbar');
+        var $navbarToggler = $('.navbar-toggler');
+        var $navbarCollapse = $('.navbar-collapse');
+        
+        if (!$navbar.is(e.target) && $navbar.has(e.target).length === 0 && $navbarCollapse.hasClass('show')) {
+            $navbarCollapse.removeClass('show');
+            $('body').removeClass('navbar-open');
+            $navbarToggler.attr('aria-expanded', 'false');
+        }
+    });
+    
+    // Prevent menu from closing when clicking inside it
+    $('.navbar-collapse').on('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Handle escape key
+    $(document).on('keydown', function(e) {
+        if (e.keyCode === 27 && $('.navbar-collapse').hasClass('show')) { // ESC key
+            $('.navbar-collapse').removeClass('show');
+            $('body').removeClass('navbar-open');
+            $('.navbar-toggler').attr('aria-expanded', 'false');
+        }
+    });
+    
+    // Smooth scroll for anchor links
+    $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+            $('html, body').animate({
+                scrollTop: target.offset().top - 70
+            }, 1000);
+        }
+    });
+    
+    // Fix viewport height for mobile browsers
+    function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
 });
